@@ -3,95 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Merge multiple PDFs online with ease. Responsive, SEO-friendly, and fast PDF merging application.">
-<meta name="keywords" content="PDF merge, merge PDF online, PDF tools, PDF editor, PDF combiner">
-<meta name="author" content="nexpdf">
 <title>MergePDF - Merge PDFs Online</title>
+<meta name="description" content="Free online tool to merge multiple PDF files into one. Drag, reorder, and combine instantly.">
+<meta name="keywords" content="merge pdf, combine pdf, pdf merger online, free pdf tool">
+<meta name="author" content="YourName">
 
-<!-- SEO Schema Markup -->
+<!-- Schema for SEO -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "MergePDF",
-  "url": "https://www.yourwebsite.com",
-  "description": "Merge multiple PDFs online easily. Responsive, fast, and modern PDF merger.",
-  "applicationCategory": "ProductivityApplication",
-  "operatingSystem": "Web",
-  "creator": {
-    "@type": "Organization",
-    "name": "NexPdf"
-  }
+  "url": "https://yourwebsite.com",
+  "description": "Free online PDF merger tool with drag and drop support, thumbnails, and reordering.",
+  "applicationCategory": "Utility",
+  "operatingSystem": "Web"
 }
 </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-X"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'UA-XXXXX-X');
-</script>
-
-<!-- PDF-Lib -->
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
-
-<!-- PDF.js -->
-<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
 <style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:linear-gradient(to right,#00c6ff,#0072ff); color:#fff; min-height:100vh; display:flex; flex-direction:column;}
-header{text-align:center;padding:2rem 1rem;}
-header h1{font-size:3rem;margin-bottom:0.5rem;}
-header p{font-size:1.2rem;}
-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;}
-.upload-section{background:rgba(255,255,255,0.1); padding:2rem; border-radius:15px; text-align:center; width:90%; max-width:600px; transition:0.3s;}
-.upload-section.dragover{border:2px dashed #00ffea;}
-.upload-section label{color:#00c6ff; cursor:pointer; font-weight:bold;}
-.file-preview{display:flex; flex-wrap:wrap; justify-content:center; margin:1rem 0;}
-.file-thumb{background:rgba(255,255,255,0.1); border-radius:10px; margin:0.5rem; padding:0.5rem; width:100px; text-align:center; font-size:0.8rem; cursor:grab;}
-.file-thumb.dragging{opacity:0.5;}
-.file-thumb canvas{width:100px; height:auto; border-radius:5px; display:block; margin-bottom:0.3rem;}
-.progress-container{width:100%; background: rgba(255,255,255,0.2); border-radius:10px; height:10px; margin:1rem 0;}
-.progress-bar{height:100%; width:0%; background:#00ffea; border-radius:10px; transition:width 0.3s;}
-.upload-section button{padding:0.8rem 2rem; background:#ff9800; border:none; border-radius:10px; font-size:1rem; cursor:pointer; transition:0.3s;}
-.upload-section button:hover{background:#e68900;}
-#downloadLink{display:block; margin-top:1rem; padding:1rem 2rem; background:#00e676; color:#000; text-decoration:none; border-radius:10px; font-weight:bold; transition:0.3s;}
-#downloadLink:hover{background:#00c853;}
-footer{text-align:center; padding:1rem; background: rgba(0,0,0,0.2);}
-@media screen and (max-width:600px){header h1{font-size:2rem;}}
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upload-section {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  transition: 0.3s;
+}
+.upload-section.dragover {
+  border: 2px dashed #00ffea;
+}
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.file-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 100px;
+  cursor: grab;
+  transition: transform 0.2s;
+}
+.file-thumb.dragging {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+.file-thumb canvas {
+  width: 100%;
+  border-radius: 4px;
+}
+.progress-container {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 10px;
+  margin: 1rem 0;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #00ffea;
+  border-radius: 10px;
+  transition: width 0.3s;
+}
+button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: #ff9800;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover {
+  background: #ffa733;
+}
+#downloadLink {
+  display: none;
+  background: #00e676;
+  color: #000;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+}
 </style>
 </head>
 <body>
-
 <header>
-<h1>MergePDF</h1>
-<p>Combine multiple PDF files into one instantly!</p>
+  <h1>MergePDF</h1>
+  <p>Upload, reorder, and merge PDFs — instantly!</p>
 </header>
 
 <main>
-<div class="upload-section" id="dropArea">
-<input type="file" id="pdfFiles" accept="application/pdf" multiple hidden>
-<p>Drag & Drop PDF files here or <label for="pdfFiles">Browse</label></p>
-<div id="filePreview" class="file-preview"></div>
-<div class="progress-container">
-    <div id="progressBar" class="progress-bar"></div>
-</div>
-<button id="mergeBtn">Merge PDFs</button>
-<a id="downloadLink" style="display:none;" download="merged.pdf">Download Merged PDF</a>
-</div>
+  <div class="upload-section" id="dropArea">
+    <input type="file" id="pdfFiles" accept="application/pdf" multiple hidden>
+    <p>Drag & Drop PDF files here or <label for="pdfFiles" style="color:#00e6ff; cursor:pointer;">Browse</label></p>
+    <div id="filePreview" class="file-preview"></div>
+    <div class="progress-container"><div id="progressBar" class="progress-bar"></div></div>
+    <button id="mergeBtn">Merge PDFs</button>
+    <a id="downloadLink" download="merged.pdf">Download Merged PDF</a>
+  </div>
 </main>
 
-<footer>
-<p>&copy; 2025 Nexpdf. All rights reserved.</p>
-</footer>
+<footer><p>&copy; 2025 MergePDF. All rights reserved.</p></footer>
 
 <script>
 const { PDFDocument } = PDFLib;
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
 const dropArea = document.getElementById('dropArea');
 const fileInput = document.getElementById('pdfFiles');
@@ -102,98 +159,100 @@ const downloadLink = document.getElementById('downloadLink');
 
 let filesList = [];
 
-// Drag & Drop events
-['dragenter','dragover'].forEach(e=>dropArea.addEventListener(e,ev=>{ev.preventDefault(); ev.stopPropagation(); dropArea.classList.add('dragover');}));
-['dragleave','drop'].forEach(e=>dropArea.addEventListener(e,ev=>{ev.preventDefault(); ev.stopPropagation(); dropArea.classList.remove('dragover');}));
-
+// Drag & Drop Upload
+['dragenter','dragover'].forEach(ev => dropArea.addEventListener(ev, e => {
+  e.preventDefault(); dropArea.classList.add('dragover');
+}));
+['dragleave','drop'].forEach(ev => dropArea.addEventListener(ev, e => {
+  e.preventDefault(); dropArea.classList.remove('dragover');
+}));
 dropArea.addEventListener('drop', e => handleFiles(e.dataTransfer.files));
 fileInput.addEventListener('change', e => handleFiles(e.target.files));
 
-async function handleFiles(files){
-    for(let file of files){
-        if(file.type!=='application/pdf') continue;
-        filesList.push(file);
+async function handleFiles(files) {
+  for (let file of files) {
+    if (file.type !== 'application/pdf') continue;
+    filesList.push(file);
 
-        const thumb = document.createElement('div');
-        thumb.classList.add('file-thumb');
-        thumb.setAttribute('draggable','true');
+    const thumb = document.createElement('div');
+    thumb.className = 'file-thumb';
+    thumb.draggable = true;
 
-        const canvas = document.createElement('canvas');
-        thumb.appendChild(canvas);
-        const nameEl = document.createElement('div');
-        nameEl.textContent = file.name;
-        thumb.appendChild(nameEl);
-        previewContainer.appendChild(thumb);
+    const canvas = document.createElement('canvas');
+    const name = document.createElement('div');
+    name.textContent = file.name;
+    thumb.append(canvas, name);
+    previewContainer.appendChild(thumb);
 
-        // Render first-page thumbnail with pdf.js
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-        const page = await pdf.getPage(1);
-        const viewport = page.getViewport({scale:0.3});
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        const context = canvas.getContext('2d');
-        await page.render({canvasContext:context, viewport:viewport}).promise;
+    renderThumbnail(file, canvas);
 
-        // Drag-and-drop reordering
-        thumb.addEventListener('dragstart', e=>thumb.classList.add('dragging'));
-        thumb.addEventListener('dragend', e=>{
-            thumb.classList.remove('dragging');
-            updateFilesOrder();
-        });
-    }
+    thumb.addEventListener('dragstart', () => thumb.classList.add('dragging'));
+    thumb.addEventListener('dragend', () => {
+      thumb.classList.remove('dragging');
+      reorderFiles();
+    });
+  }
+}
+
+// Render thumbnail
+async function renderThumbnail(file, canvas) {
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  const page = await pdf.getPage(1);
+  const viewport = page.getViewport({ scale: 0.3 });
+  const ctx = canvas.getContext('2d');
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  await page.render({ canvasContext: ctx, viewport }).promise;
 }
 
 // Reordering logic
-previewContainer.addEventListener('dragover', e=>{
-    e.preventDefault();
-    const dragging = document.querySelector('.dragging');
-    const afterElement = getDragAfterElement(previewContainer, e.clientX);
-    if(afterElement==null) previewContainer.appendChild(dragging);
-    else previewContainer.insertBefore(dragging, afterElement);
+previewContainer.addEventListener('dragover', e => {
+  e.preventDefault();
+  const dragging = document.querySelector('.dragging');
+  const after = getDragAfterElement(previewContainer, e.clientX);
+  if (!after) previewContainer.appendChild(dragging);
+  else previewContainer.insertBefore(dragging, after);
 });
 
-function getDragAfterElement(container, x){
-    const draggableElements = [...container.querySelectorAll('.file-thumb:not(.dragging)')];
-    return draggableElements.reduce((closest, child)=>{
-        const box = child.getBoundingClientRect();
-        const offset = x - box.left - box.width/2;
-        if(offset<0 && offset>closest.offset){ return {offset:offset, element:child}; }
-        else return closest;
-    }, {offset:Number.NEGATIVE_INFINITY}).element;
+function getDragAfterElement(container, x) {
+  const els = [...container.querySelectorAll('.file-thumb:not(.dragging)')];
+  return els.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = x - box.left - box.width / 2;
+    if (offset < 0 && offset > closest.offset)
+      return { offset, element: child };
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-function updateFilesOrder(){
-    const newFilesList = [];
-    previewContainer.querySelectorAll('.file-thumb').forEach(thumb=>{
-        const name = thumb.querySelector('div').textContent;
-        const file = filesList.find(f=>f.name===name);
-        if(file) newFilesList.push(file);
-    });
-    filesList = newFilesList;
+function reorderFiles() {
+  const newList = [];
+  previewContainer.querySelectorAll('.file-thumb div:first-of-type').forEach(el => {
+    const name = el.textContent;
+    const file = filesList.find(f => f.name === name);
+    if (file) newList.push(file);
+  });
+  filesList = newList;
 }
 
 // Merge PDFs
-mergeBtn.addEventListener('click', async ()=>{
-    if(filesList.length<2){ alert("Please select at least two PDFs."); return; }
-    const mergedPdf = await PDFDocument.create();
-    progressBar.style.width='0%';
-    let progressIncrement=100/filesList.length;
-    let currentProgress=0;
+mergeBtn.addEventListener('click', async () => {
+  if (filesList.length < 2) return alert('Select at least two PDFs.');
+  const mergedPdf = await PDFDocument.create();
+  let progress = 0, step = 100 / filesList.length;
 
-    for(let file of filesList){
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await PDFDocument.load(arrayBuffer);
-        const copiedPages = await mergedPdf.copyPages(pdf,pdf.getPageIndices());
-        copiedPages.forEach(page=>mergedPdf.addPage(page));
-        currentProgress+=progressIncrement;
-        progressBar.style.width=`${Math.round(currentProgress)}%`;
-    }
+  for (let file of filesList) {
+    const pdf = await PDFDocument.load(await file.arrayBuffer());
+    const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+    pages.forEach(p => mergedPdf.addPage(p));
+    progress += step;
+    progressBar.style.width = progress + '%';
+  }
 
-    const mergedPdfBytes = await mergedPdf.save();
-    const blob = new Blob([mergedPdfBytes],{type:"application/pdf"});
-    downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.style.display="inline-block";
+  const blob = new Blob([await mergedPdf.save()], { type: 'application/pdf' });
+  downloadLink.href = URL.createObjectURL(blob);
+  downloadLink.style.display = 'inline-block';
 });
 </script>
 </body>
