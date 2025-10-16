@@ -122,6 +122,9 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             align-self: flex-start;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
         .tool-card:hover .tool-btn {
@@ -189,115 +192,143 @@
         const tools = [
             {
                 name: "Merge PDF",
-                description: "Combine multiple PDF files into a single document."
+                description: "Combine multiple PDF files into a single document.",
+                url: "mergepdf.html"
             },
             {
                 name: "Split PDF",
-                description: "Extract specific pages or split PDF into multiple files."
+                description: "Extract specific pages or split PDF into multiple files.",
+                url: "#split-pdf"
             },
             {
                 name: "Compress PDF",
-                description: "Reduce file size while maintaining quality."
+                description: "Reduce file size while maintaining quality.",
+                url: "#compress-pdf"
             },
             {
                 name: "JPG to PDF",
-                description: "Convert images to PDF format with customizable settings."
+                description: "Convert images to PDF format with customizable settings.",
+                url: "#jpg-to-pdf"
             },
             {
                 name: "Word to PDF",
-                description: "Transform Word documents into professional PDF files."
+                description: "Transform Word documents into professional PDF files.",
+                url: "#word-to-pdf"
             },
             {
                 name: "PowerPoint to PDF",
-                description: "Convert presentations to PDF while preserving formatting."
+                description: "Convert presentations to PDF while preserving formatting.",
+                url: "#powerpoint-to-pdf"
             },
             {
                 name: "Excel to PDF",
-                description: "Turn spreadsheets into PDF documents with proper layout."
+                description: "Turn spreadsheets into PDF documents with proper layout.",
+                url: "#excel-to-pdf"
             },
             {
                 name: "HTML to PDF",
-                description: "Convert web pages or HTML files to PDF format."
+                description: "Convert web pages or HTML files to PDF format.",
+                url: "#html-to-pdf"
             },
             {
                 name: "PDF to JPG",
-                description: "Extract images from PDF or convert pages to JPG format."
+                description: "Extract images from PDF or convert pages to JPG format.",
+                url: "#pdf-to-jpg"
             },
             {
                 name: "PDF to Word",
-                description: "Convert PDF files to editable Word documents."
+                description: "Convert PDF files to editable Word documents.",
+                url: "#pdf-to-word"
             },
             {
                 name: "PDF to PowerPoint",
-                description: "Transform PDF content into presentation slides."
+                description: "Transform PDF content into presentation slides.",
+                url: "#pdf-to-powerpoint"
             },
             {
                 name: "PDF to Excel",
-                description: "Extract tables from PDF to editable Excel spreadsheets."
+                description: "Extract tables from PDF to editable Excel spreadsheets.",
+                url: "#pdf-to-excel"
             },
             {
                 name: "PDF to PDF/A",
-                description: "Convert to archival format for long-term preservation."
+                description: "Convert to archival format for long-term preservation.",
+                url: "#pdf-to-pdfa"
             },
             {
                 name: "Organize PDF",
-                description: "Reorder, delete, or insert pages in your PDF document."
+                description: "Reorder, delete, or insert pages in your PDF document.",
+                url: "#organize-pdf"
             },
             {
                 name: "Repair PDF",
-                description: "Recover content from corrupted or damaged PDF files."
+                description: "Recover content from corrupted or damaged PDF files.",
+                url: "#repair-pdf"
             },
             {
                 name: "OCR PDF",
-                description: "Make scanned PDFs searchable and editable with OCR."
+                description: "Make scanned PDFs searchable and editable with OCR.",
+                url: "#ocr-pdf"
             },
             {
                 name: "Edit PDF",
-                description: "Add, change text, images, shapes, and annotations."
+                description: "Add, change text, images, shapes, and annotations.",
+                url: "#edit-pdf"
             },
             {
                 name: "Rotate PDF",
-                description: "Change page orientation for better viewing or printing."
+                description: "Change page orientation for better viewing or printing.",
+                url: "#rotate-pdf"
             },
             {
                 name: "Add Page Numbers",
-                description: "Insert customizable page numbers to your document."
+                description: "Insert customizable page numbers to your document.",
+                url: "#add-page-numbers"
             },
             {
                 name: "Watermark PDF",
-                description: "Add text or image watermarks for branding or protection."
+                description: "Add text or image watermarks for branding or protection.",
+                url: "#watermark-pdf"
             },
             {
                 name: "Unlock PDF",
-                description: "Remove password protection from PDF documents."
+                description: "Remove password protection from PDF documents.",
+                url: "#unlock-pdf"
             },
             {
                 name: "Protect PDF",
-                description: "Add password encryption and security features."
+                description: "Add password encryption and security features.",
+                url: "#protect-pdf"
             },
             {
                 name: "Sign PDF",
-                description: "Add electronic signatures and signature requests."
+                description: "Add electronic signatures and signature requests.",
+                url: "#sign-pdf"
             },
             {
                 name: "Redact PDF",
-                description: "Permanently remove sensitive information from documents."
+                description: "Permanently remove sensitive information from documents.",
+                url: "#redact-pdf"
             },
             {
                 name: "Compare PDF",
-                description: "Side-by-side comparison to spot differences between files."
+                description: "Side-by-side comparison to spot differences between files.",
+                url: "#compare-pdf"
             },
             {
                 name: "Crop PDF",
-                description: "Trim margins or select visible area of PDF pages."
+                description: "Trim margins or select visible area of PDF pages.",
+                url: "#crop-pdf"
             },
             {
                 name: "Scan to PDF",
-                description: "Capture documents from mobile camera to PDF format."
+                description: "Capture documents from mobile camera to PDF format.",
+                url: "#scan-to-pdf"
             },
             {
                 name: "Web to PDF",
-                description: "Convert webpages or URLs directly to PDF documents."
+                description: "Convert webpages or URLs directly to PDF documents.",
+                url: "#web-to-pdf"
             }
         ];
 
@@ -311,15 +342,18 @@
             toolCard.innerHTML = `
                 <h3>${tool.name}</h3>
                 <p>${tool.description}</p>
-                <button class="tool-btn">Use Tool</button>
+                <a href="${tool.url}" class="tool-btn">Use Tool</a>
             `;
             
             toolsGrid.appendChild(toolCard);
             
-            // Add click event to the button
+            // Add click event to the button for alert functionality
             const button = toolCard.querySelector('.tool-btn');
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent actual navigation for demo
                 alert(`Redirecting to ${tool.name}`);
+                // In a real implementation, you would remove the alert and let the href work
+                // window.location.href = tool.url;
             });
         });
     </script>
