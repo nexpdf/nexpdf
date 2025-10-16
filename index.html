@@ -1,361 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexPdf - All-in-One PDF Tools</title>
-    <style>
-        /* CSS Variables for consistent theming */
-        :root {
-            --bg-color: #1E1E2F;
-            --text-color: #EAEAEA;
-            --header-bg: #2B2D42;
-            --accent-color: #FFD700;
-            --card-bg: #3A3D5B;
-            --hover-accent: #E6C200;
-            --shadow: rgba(255, 215, 0, 0.2);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexPdf - All-in-One PDF Tools</title>
+  <style>
+    :root {
+      --bg-color: #1e1e2f;
+      --text-color: #eaeaea;
+      --header-bg: #2b2d42;
+      --accent-color: #ffd700;
+      --card-bg: #3a3d5b;
+      --hover-accent: #e6c200;
+      --shadow: rgba(255, 215, 0, 0.2);
+    }
 
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding-bottom: 2rem;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-bottom: 2rem;
+    }
 
-        /* Header Styles */
-        header {
-            background-color: var(--header-bg);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-        }
+    header {
+      background-color: var(--header-bg);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      margin-bottom: 2rem;
+    }
 
-        header h1 {
-            color: var(--accent-color);
-            font-size: 2.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    header h1 {
+      color: var(--accent-color);
+      font-size: 2.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
 
-        /* Main Content Styles */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-        .intro {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            padding: 0 1rem;
-        }
+    .intro {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 0 1rem;
+    }
 
-        .intro h2 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
+    .intro h2 {
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
 
-        .intro p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
+    .intro p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
 
-        /* Tools Grid Styles */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
 
-        .tool-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px var(--shadow);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+    .tool-card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
 
-        .tool-card:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px var(--shadow);
-        }
+    .tool-card:hover {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px var(--shadow);
+    }
 
-        .tool-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
+    .tool-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent-color);
+    }
 
-        .tool-card:hover h3 {
-            color: var(--bg-color);
-        }
+    .tool-card:hover h3 {
+      color: var(--bg-color);
+    }
 
-        .tool-card p {
-            flex-grow: 1;
-            margin-bottom: 1.2rem;
-        }
+    .tool-card p {
+      flex-grow: 1;
+      margin-bottom: 1.2rem;
+    }
 
-        .tool-btn {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            align-self: flex-start;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
+    .tool-btn {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      align-self: flex-start;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
 
-        .tool-card:hover .tool-btn {
-            background-color: var(--hover-accent);
-        }
+    .tool-card:hover .tool-btn {
+      background-color: var(--hover-accent);
+    }
 
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--card-bg);
-            color: #aaa;
-        }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--card-bg);
+      color: #aaa;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            .intro h2 {
-                font-size: 1.5rem;
-            }
-        }
+    @media (max-width: 768px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
 
-        @media (max-width: 480px) {
-            .tool-card {
-                padding: 1rem;
-            }
-            
-            .tool-btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .intro h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tool-card {
+        padding: 1rem;
+      }
+
+      .tool-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>NexPdf</h1>
-    </header>
+  <header>
+    <h1>NexPdf</h1>
+  </header>
 
-    <main class="container">
-        <section class="intro">
-            <h2>All-in-One PDF Solution</h2>
-            <p>Transform, edit, and manage your documents with our comprehensive suite of PDF tools. Everything you need in one place.</p>
-        </section>
+  <main class="container">
+    <section class="intro">
+      <h2>All-in-One PDF Solution</h2>
+      <p>
+        Transform, edit, and manage your documents with our comprehensive suite
+        of PDF tools. Everything you need in one place.
+      </p>
+    </section>
 
-        <section class="tools-grid">
-            <!-- Tool cards will be generated by JavaScript -->
-        </section>
-    </main>
+    <section class="tools-grid"></section>
+  </main>
 
-    <footer class="container">
-        <p>&copy; 2023 NexPdf. All rights reserved.</p>
-    </footer>
+  <footer class="container">
+    <p>&copy; 2025 NexPdf. All rights reserved.</p>
+  </footer>
 
-    <script>
-        // Tool data array
-        const tools = [
-            {
-                name: "Merge PDF",
-                description: "Combine multiple PDF files into a single document.",
-                url: "https://github.com/nexpdf/nexpdf/blob/main/merge-pdf.html"
-            },
-            {
-                name: "Split PDF",
-                description: "Extract specific pages or split PDF into multiple files.",
-                url: "#split-pdf"
-            },
-            {
-                name: "Compress PDF",
-                description: "Reduce file size while maintaining quality.",
-                url: "#compress-pdf"
-            },
-            {
-                name: "JPG to PDF",
-                description: "Convert images to PDF format with customizable settings.",
-                url: "#jpg-to-pdf"
-            },
-            {
-                name: "Word to PDF",
-                description: "Transform Word documents into professional PDF files.",
-                url: "#word-to-pdf"
-            },
-            {
-                name: "PowerPoint to PDF",
-                description: "Convert presentations to PDF while preserving formatting.",
-                url: "#powerpoint-to-pdf"
-            },
-            {
-                name: "Excel to PDF",
-                description: "Turn spreadsheets into PDF documents with proper layout.",
-                url: "#excel-to-pdf"
-            },
-            {
-                name: "HTML to PDF",
-                description: "Convert web pages or HTML files to PDF format.",
-                url: "#html-to-pdf"
-            },
-            {
-                name: "PDF to JPG",
-                description: "Extract images from PDF or convert pages to JPG format.",
-                url: "#pdf-to-jpg"
-            },
-            {
-                name: "PDF to Word",
-                description: "Convert PDF files to editable Word documents.",
-                url: "#pdf-to-word"
-            },
-            {
-                name: "PDF to PowerPoint",
-                description: "Transform PDF content into presentation slides.",
-                url: "#pdf-to-powerpoint"
-            },
-            {
-                name: "PDF to Excel",
-                description: "Extract tables from PDF to editable Excel spreadsheets.",
-                url: "#pdf-to-excel"
-            },
-            {
-                name: "PDF to PDF/A",
-                description: "Convert to archival format for long-term preservation.",
-                url: "#pdf-to-pdfa"
-            },
-            {
-                name: "Organize PDF",
-                description: "Reorder, delete, or insert pages in your PDF document.",
-                url: "#organize-pdf"
-            },
-            {
-                name: "Repair PDF",
-                description: "Recover content from corrupted or damaged PDF files.",
-                url: "#repair-pdf"
-            },
-            {
-                name: "OCR PDF",
-                description: "Make scanned PDFs searchable and editable with OCR.",
-                url: "#ocr-pdf"
-            },
-            {
-                name: "Edit PDF",
-                description: "Add, change text, images, shapes, and annotations.",
-                url: "#edit-pdf"
-            },
-            {
-                name: "Rotate PDF",
-                description: "Change page orientation for better viewing or printing.",
-                url: "#rotate-pdf"
-            },
-            {
-                name: "Add Page Numbers",
-                description: "Insert customizable page numbers to your document.",
-                url: "#add-page-numbers"
-            },
-            {
-                name: "Watermark PDF",
-                description: "Add text or image watermarks for branding or protection.",
-                url: "#watermark-pdf"
-            },
-            {
-                name: "Unlock PDF",
-                description: "Remove password protection from PDF documents.",
-                url: "#unlock-pdf"
-            },
-            {
-                name: "Protect PDF",
-                description: "Add password encryption and security features.",
-                url: "#protect-pdf"
-            },
-            {
-                name: "Sign PDF",
-                description: "Add electronic signatures and signature requests.",
-                url: "#sign-pdf"
-            },
-            {
-                name: "Redact PDF",
-                description: "Permanently remove sensitive information from documents.",
-                url: "#redact-pdf"
-            },
-            {
-                name: "Compare PDF",
-                description: "Side-by-side comparison to spot differences between files.",
-                url: "#compare-pdf"
-            },
-            {
-                name: "Crop PDF",
-                description: "Trim margins or select visible area of PDF pages.",
-                url: "#crop-pdf"
-            },
-            {
-                name: "Scan to PDF",
-                description: "Capture documents from mobile camera to PDF format.",
-                url: "#scan-to-pdf"
-            },
-            {
-                name: "Web to PDF",
-                description: "Convert webpages or URLs directly to PDF documents.",
-                url: "#web-to-pdf"
-            }
-        ];
+  <script>
+    const tools = [
+      { name: "Merge PDF", description: "Combine multiple PDF files into a single document.", url: "merge-pdf.html" },
+      { name: "Split PDF", description: "Extract specific pages or split PDF into multiple files.", url: "split-pdf.html" },
+      { name: "Compress PDF", description: "Reduce file size while maintaining quality.", url: "compress-pdf.html" },
+      { name: "JPG to PDF", description: "Convert images to PDF format with customizable settings.", url: "jpg-to-pdf.html" },
+      { name: "PDF to Word", description: "Convert PDF files to editable Word documents.", url: "pdf-to-word.html" },
+      { name: "Edit PDF", description: "Add, change text, images, shapes, and annotations.", url: "edit-pdf.html" },
+      { name: "Sign PDF", description: "Add electronic signatures and signature requests.", url: "sign-pdf.html" },
+      { name: "Protect PDF", description: "Add password encryption and security features.", url: "protect-pdf.html" }
+    ];
 
-        // Generate tool cards dynamically
-        const toolsGrid = document.querySelector('.tools-grid');
-        
-        tools.forEach(tool => {
-            const toolCard = document.createElement('div');
-            toolCard.className = 'tool-card';
-            
-            toolCard.innerHTML = `
-                <h3>${tool.name}</h3>
-                <p>${tool.description}</p>
-                <a href="${tool.url}" class="tool-btn">Use Tool</a>
-            `;
-            
-            toolsGrid.appendChild(toolCard);
-            
-            // Add click event to the button for alert functionality
-            const button = toolCard.querySelector('.tool-btn');
-            button.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent actual navigation for demo
-                alert(`Redirecting to ${tool.name}`);
-                // In a real implementation, you would remove the alert and let the href work
-                // window.location.href = tool.url;
-            });
-        });
-    </script>
+    const toolsGrid = document.querySelector(".tools-grid");
+
+    tools.forEach((tool) => {
+      const toolCard = document.createElement("div");
+      toolCard.className = "tool-card";
+      toolCard.innerHTML = `
+        <h3>${tool.name}</h3>
+        <p>${tool.description}</p>
+        <a href="${tool.url}" class="tool-btn">Use Tool</a>
+      `;
+      toolsGrid.appendChild(toolCard);
+    });
+  </script>
 </body>
 </html>
